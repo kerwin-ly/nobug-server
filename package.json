@@ -1,0 +1,31 @@
+{
+  "name": "node-forum",
+  "version": "1.0.0",
+  "description": "a forum about node",
+  "main": "app.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon --inspect bin/www",
+    "test": "./node_modules/.bin/mocha -u bdd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerwin-ly/node-forum.git"
+  },
+  "author": "kerwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kerwin-ly/node-forum/issues"
+  },
+  "homepage": "https://github.com/kerwin-ly/node-forum#readme",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10"
+  }
+}
