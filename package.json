@@ -4,7 +4,8 @@
   "description": "a forum about node",
   "main": "app.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon --inspect bin/www",
+    "start": "./node_modules/.bin/nodemon bin/www",
+    "inspect": "node --inspect bin/www",
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
   },
@@ -24,7 +25,8 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.1",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "mysql": "^2.16.0"
   },
   "devDependencies": {
     "mocha": "^6.0.2",

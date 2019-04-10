@@ -3,18 +3,17 @@ const bodyParser = require('koa-bodyparser'); // get request params of 'POST' me
 const serve = require('koa-static'); // load static resources
 const session = require('koa-session'); // session
 const path = require('path');
-const miSend = require('./mi-send');
+const miSend = require('./send');
 
 module.exports = (app) => {
   // set a interceptor for every http request
-  app.use(async (req, res, next) => {
+  app.use(async (ctx, next) => {
     // proxy setting
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
-    if (req.method == 'OPTIONS') {
-      res.send(200); // quickly response if 'OPTIONS' request
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    if (ctx.request.method == 'OPTIONS') {
+      ctx.response.status = 200; // quickly response if 'OPTIONS' request
     } else {
       next();
     }

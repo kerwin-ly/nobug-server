@@ -1,9 +1,25 @@
 const userModel = require('../model/user');
-const miSend = require('../middleware/mi-send');
+const miSend = require('../middleware/send');
 
 module.exports = {
 	index: async(ctx, next) => {
-		ctx.response.body = `<h1>index page</h1>`
+		// let {
+		// 	name,
+		// 	password
+		// } = ctx.request.body;
+		const userInfo = {
+			name: 'kerwin',
+			telephone: '18180544526',
+			email: '879688355@qq.com',
+			avatar: null,
+			fansNum: 0
+		}
+		let data = await userModel.register(userInfo);
+		if (data) {
+			ctx.body = data;
+		}
+
+		console.log(data);
 	},
 	home: async(ctx, next) => {
 		console.log(ctx.request.query)

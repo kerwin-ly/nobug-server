@@ -1,4 +1,4 @@
-// mi-send: response json
+// middleware-send: response json
 module.exports = () => {
   function render(json) {
     this.set("Content-Type", "application/json");
