@@ -4,5 +4,5 @@ module.exports = {
   port: 3306,
   user: 'root',
   password: 'liyi**1021',
-  database: 'node_forum'
+  database: 'nobug'
 }

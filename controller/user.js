@@ -3,23 +3,16 @@ const miSend = require('../middleware/send');
 
 module.exports = {
 	index: async(ctx, next) => {
-		// let {
-		// 	name,
-		// 	password
-		// } = ctx.request.body;
 		const userInfo = {
 			name: 'kerwin',
-			telephone: '18180544526',
+			password: 'liyi**1021',
 			email: '879688355@qq.com',
-			avatar: null,
-			fansNum: 0
+			avatar: null
 		}
 		let data = await userModel.register(userInfo);
 		if (data) {
 			ctx.body = data;
 		}
-
-		console.log(data);
 	},
 	home: async(ctx, next) => {
 		console.log(ctx.request.query)
