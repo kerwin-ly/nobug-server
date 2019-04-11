@@ -1,2 +1,4 @@
-# node-forum
-A forum about node.
+# nobug-server
+
+## Technology Stack
+Node.js + Koa2 + Mysql
