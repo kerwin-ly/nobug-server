@@ -2,27 +2,6 @@ const userModel = require('../model/user');
 const miSend = require('../middleware/send');
 
 module.exports = {
-	index: async(ctx, next) => {
-		const userInfo = {
-			name: 'kerwin',
-			password: 'liyi**1021',
-			email: '879688355@qq.com',
-			avatar: null
-		}
-		let data = await userModel.register(userInfo);
-		if (data) {
-			ctx.body = data;
-		}
-	},
-	home: async(ctx, next) => {
-		console.log(ctx.request.query)
-		console.log(ctx.request.querystring)
-		ctx.response.body = '<h1>HOME page</h1>'
-	},
-	homeParams: async(ctx, next) => {
-		console.log(ctx.params)
-		ctx.response.body = '<h1>HOME page /:id/:name</h1>'
-	},
 	login: async(ctx, next) => {
 		ctx.response.body =
 			`
@@ -36,11 +15,13 @@ module.exports = {
 		`
 	},
 	register: async(ctx, next) => {
-		let {
-			name,
-			password
-		} = ctx.request.body;
-		let data = await userModel.register(name, password);
+		const userInfo = {
+			name: 'kerwin',
+			password: 'liyi**1021',
+			email: '879688355@qq.com',
+			avatar: null
+		}
+		const data = await userModel.register(ctx, userInfo);
 		ctx.body = data;
 	}
 }
