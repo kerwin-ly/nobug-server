@@ -15,13 +15,9 @@ module.exports = {
 		`
 	},
 	register: async(ctx, next) => {
-		const userInfo = {
-			name: 'kerwin',
-			password: 'liyi**1021',
-			email: '879688355@qq.com',
-			avatar: null
-		}
-		const data = await userModel.register(ctx, userInfo);
-		ctx.body = data;
+		ctx.response.body = await userModel.register(ctx.request.body);
+	},
+	getUserList: async(ctx, next) => {
+		ctx.response.body = await userModel.getUserList();
 	}
 }

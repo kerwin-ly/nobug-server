@@ -7,10 +7,31 @@ module.exports = {
     let data;
 
     try {
+      await query(sql, values);
+      data = {
+        status: 200,
+        message: 'success'
+      }
+    } catch (error) {
+      data = {
+        status: 500,
+        message: error
+      }
+    }
+    return data;
+  },
+  login: async (loginInfo) => {
+    
+  },
+  getUserList: async () => {
+    let sql = 'SELECT * FROM user';
+    let data;
+
+    try {
       data = {
         status: 200,
         message: 'success',
-        data: await query(sql, values)
+        data: await query(sql)
       }
     } catch (error) {
       data = {
@@ -19,8 +40,5 @@ module.exports = {
       }
     }
     return data;
-  },
-  login: async(loginInfo) => {
-    
   }
 }

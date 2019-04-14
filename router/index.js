@@ -1,9 +1,8 @@
 const router = require('koa-router')();
-const userController = require('../controller/user');
+const user = require('./user');
 
 module.exports = (app) => {
-  router.post('/user/register', userController.register);
-  // router.get('/home', userController.home);
+  router.use('/user', user.routes(), user.allowedMethods());
 
   app.use(router.routes());
   app.use(router.allowedMethods());
