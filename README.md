@@ -1,5 +1,5 @@
 # nobug-server
->A lighter web system to manage the bug.
+>A website to manage bugs.
 
 ## Technology Stack
 Node.js + Koa2 + Mysql
