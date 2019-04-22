@@ -4,7 +4,7 @@
   "description": "a forum about node",
   "main": "app.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon bin/www",
+    "server": "./node_modules/.bin/nodemon bin/www",
     "inspect": "node --inspect bin/www",
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
