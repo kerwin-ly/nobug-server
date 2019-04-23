@@ -4,21 +4,10 @@ const serve = require('koa-static'); // load static resources
 const session = require('koa-session'); // session
 const path = require('path');
 const miSend = require('./send');
+const checkLoginState = require('./checkLoginState');
 
 module.exports = (app) => {
-  // set a interceptor for every http request
-  app.use(async (ctx, next) => {
-    // proxy setting
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    if (ctx.request.method == 'OPTIONS') {
-      ctx.response.status = 200; // quickly response if 'OPTIONS' request
-    } else {
-      next();
-    }
-  })
-
+  app.keys = ['sessionID']; // close error. https://github.com/koajs/session/issues/55
   // other-middlewares
   app.use(bodyParser());
   app.use(serve(path.resolve(__dirname, './public')));
@@ -33,5 +22,6 @@ module.exports = (app) => {
   }, app));
 
   // self-middlewares
-  app.use(miSend())
+  app.use(miSend());
+  app.use(checkLoginState());
 }
