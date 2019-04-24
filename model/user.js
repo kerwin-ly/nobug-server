@@ -2,20 +2,25 @@ const { query } =  require('../utils/sql/query');
 
 module.exports = {
   login: async (loginInfo, ctx) => {
-    const sql = 'SELECT user_id FROM user WHERE user_email = ? AND user_password = ?';
-    const values = [loginInfo.email, loginInfo.password];
-    const result = await query(sql, values);
+    const sql = `SELECT user_id, user_name, user_email FROM user WHERE user_email = "${loginInfo.email}" AND user_password = "${loginInfo.password}"`;
+    const result = await query(sql);
+
+    console.log(result);
 
     if ( Array.isArray(result) && result.length > 0 ) {
       ctx.session.user = result[0];
       return {
         status: 200,
-        message: '操作成功'
+        message: '操作成功',
+        data: {
+          name: result[0].user_name,
+          email: result[0].user_email
+        }
       }
     }
     return {
       status: 402,
-      message: '用户不存在'
+      message: '邮箱或密码错误'
     }
   },
   register: async (userInfo) => {
