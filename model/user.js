@@ -5,8 +5,6 @@ module.exports = {
     const sql = `SELECT user_id, user_name, user_email FROM user WHERE user_email = "${loginInfo.email}" AND user_password = "${loginInfo.password}"`;
     const result = await query(sql);
 
-    console.log(result);
-
     if ( Array.isArray(result) && result.length > 0 ) {
       ctx.session.user = result[0];
       return {
