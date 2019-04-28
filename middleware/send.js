@@ -10,6 +10,7 @@ module.exports = () => {
     this.set("Content-Type", "application/json");
     this.body = JSON.stringify(json);
   }
+
   return async (ctx, next) => {
     ctx.send = setRequestHeader.bind(ctx);
     await next();

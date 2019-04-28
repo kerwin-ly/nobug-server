@@ -1,11 +1,10 @@
 {
-  "name": "node-forum",
+  "name": "nobug-server",
   "version": "1.0.0",
-  "description": "a forum about node",
+  "description": "nobug-server",
   "main": "app.js",
   "scripts": {
-    "server": "./node_modules/.bin/nodemon bin/www",
-    "inspect": "node --inspect bin/www",
+    "server": "./node_modules/.bin/nodemon --inspect bin/www",
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
   },
@@ -21,10 +20,11 @@
   "homepage": "https://github.com/kerwin-ly/node-forum#readme",
   "dependencies": {
     "debug": "^4.1.1",
+    "ioredis": "^4.9.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "koa-session": "^5.10.1",
+    "koa-session2": "^2.2.10",
     "koa-static": "^5.0.0",
     "mysql": "^2.16.0"
   },
