@@ -24,8 +24,7 @@ module.exports = () => {
 
         if (redisData) {
           ctx.session.refresh(); // refresh session if set maxAge
-          console.log(redisData, 'this is session data');
-          // ctx.request.body = Object.assign(ctx.session.user, ctx.request.body);
+          ctx.request.body = Object.assign(ctx.session.user, ctx.request.body);
         } else {
           ctx.response.body = {
             status: 401,

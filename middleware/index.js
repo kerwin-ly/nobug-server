@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.use(serve(path.resolve(__dirname, './public')));
   app.use(session({
     key: 'SESSIONID', // default
-    // store: new Store()
+    store: new Store()
   }, app));
 
   // self-middlewares
