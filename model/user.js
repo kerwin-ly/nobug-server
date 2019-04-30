@@ -1,4 +1,4 @@
-const { query } =  require('../utils/sql/query');
+const { query } =  require('../utils/query');
 
 module.exports = {
   login: async (loginInfo, ctx) => {

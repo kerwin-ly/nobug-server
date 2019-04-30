@@ -15,6 +15,9 @@ redis-server
 # if you wanna to get redis detail
 redis-cli
 
+# start mysql
+sudo /usr/local/MySQL/support-files/mysql.server start
+
 # install
 cnpm install
 
