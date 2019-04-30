@@ -2,7 +2,7 @@
 >A website to manage bugs.
 
 ## Technology Stack
-Node.js + Koa2 + Mysql
+Node.js + Koa2 + Mysql + Redis
 
 ## Start
 ```bash
