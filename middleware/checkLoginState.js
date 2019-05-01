@@ -24,6 +24,7 @@ module.exports = () => {
 
         if (redisData) {
           ctx.session.refresh(); // refresh session if set maxAge
+          await next();
         } else {
           ctx.response.body = {
             status: 401,
@@ -31,7 +32,8 @@ module.exports = () => {
           }
         }
       }
+    } else {
+      await next();
     }
-    await next();
   }
 }

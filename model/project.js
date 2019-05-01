@@ -6,11 +6,9 @@ module.exports = {
   add: async (project, ctx) => {
     const SESSIONID = ctx.cookies.get('SESSIONID')
     const redisData = await redis.get(SESSIONID);
-    console.log(redisData)
     const sql = `INSERT INTO project (project_name, project_color, project_desc, project_creator_id) VALUES (?, ?, ?, ?)`;
     const values = [project.name, project.backgroundColor, project.description, redisData.user.user_id];
     const result = await query(sql, values);
-
 
     if (result && result.insertId >= 0) {
       return {
