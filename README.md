@@ -1,5 +1,5 @@
-# nobug-server
->A website to manage bugs.
+# nobug
+>A website to monitor bugs.The web project is here.https://github.com/kerwin-ly/nobug-web
 
 ## Technology Stack
 Node.js + Koa2 + Mysql + Redis
