@@ -4,7 +4,7 @@ const serve = require('koa-static'); // load static resources
 const session = require('koa-session2'); // session
 const path = require('path');
 const miSend = require('./send');
-const checkLoginState = require('./checkLoginState');
+const checkSession = require('./checkSession');
 const Store = require("./store.js"); //redis
 
 module.exports = (app) => {
@@ -18,5 +18,5 @@ module.exports = (app) => {
 
   // self-middlewares
   app.use(miSend());
-  app.use(checkLoginState());
+  app.use(checkSession());
 }

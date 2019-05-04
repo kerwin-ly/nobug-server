@@ -7,6 +7,9 @@ module.exports = {
 	register: async(ctx, next) => {
 		ctx.response.body = await userModel.register(ctx.request.body);
 	},
+	logout: async(ctx, next) => {
+		ctx.response.body = await userModel.logout(ctx);
+	},
 	getUserList: async(ctx, next) => {
 		ctx.response.body = await userModel.getUserList();
 	}

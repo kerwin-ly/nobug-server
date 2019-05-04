@@ -4,7 +4,7 @@ const redis = new Store();
 // 判断用户是否session超时
 module.exports = () => {
   function ignoreRoute() {
-    const ignoreRouteList = ['/api/user/login', '/api/user/register'];
+    const ignoreRouteList = ['/api/user/login', '/api/user/register', '/api/user/logout'];
     return ignoreRouteList.includes(this.url);
   }
 

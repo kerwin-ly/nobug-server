@@ -42,6 +42,16 @@ module.exports = {
       }
     }
   },
+  logout: async (ctx) => {
+    let data;
+
+    ctx.session = null;
+    data = {
+      status: 200,
+      message: '注销成功'
+    }
+    return data;
+  },
   getUserList: async () => {
     const sql = 'SELECT * FROM user';
     let data;
@@ -55,7 +65,7 @@ module.exports = {
     } catch (error) {
       data = {
         status: 500,
-        message: '内部错误'
+        message: error
       }
     }
     return data;
