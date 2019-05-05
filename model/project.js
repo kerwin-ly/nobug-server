@@ -7,7 +7,7 @@ module.exports = {
     const SESSIONID = ctx.cookies.get('SESSIONID')
     const redisData = await redis.get(SESSIONID);
     const sql = `INSERT INTO project (project_name, project_color, project_desc, project_creator_id) VALUES (?, ?, ?, ?)`;
-    const values = [project.name, project.backgroundColor, project.description, redisData.user.user_id];
+    const values = [project.name, project.backgroundColor, project.description, redisData.user.id];
     const result = await query(sql, values);
 
     if (result && result.insertId >= 0) {
@@ -21,7 +21,7 @@ module.exports = {
       message: '未知错误'
     }
   },
-  getProjects: async (ctx) => {
+  getProjects: async () => {
     const sql = `
       SELECT
       project_id as projectId, project_name as projectName, project_desc as projectDescription, project_color as projectColor, user_name as projectCreator
