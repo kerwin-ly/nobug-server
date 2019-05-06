@@ -3,44 +3,58 @@ const Store = require("../middleware/store.js"); //redis
 const redis = new Store();
 
 module.exports = {
-  add: async (project, ctx) => {
+  addProject: async (project, ctx) => {
     const SESSIONID = ctx.cookies.get('SESSIONID')
     const redisData = await redis.get(SESSIONID);
     const sql = `INSERT INTO project (project_name, project_color, project_desc, project_creator_id) VALUES (?, ?, ?, ?)`;
     const values = [project.name, project.backgroundColor, project.description, redisData.user.id];
-    const result = await query(sql, values);
+    
+    try {
+      const result = await query(sql, values);
 
-    if (result && result.insertId >= 0) {
-      return {
-        status: 200,
-        message: '操作成功'
+      if (result && result.insertId >= 0) {
+        const userProjectSql = `INSERT INTO user_project (user_id, project_id) VALUES (?, ?)`;
+        const userProjectResult = await query(userProjectSql, [redisData.user.id, result.insertId]);
+  
+        if (userProjectResult && userProjectResult.insertId >= 0) {
+          return {
+            status: 200,
+            message: '操作成功'
+          }
+        }
       }
-    }
-    return {
-      status: 207,
-      message: '未知错误'
+    } catch (error) {
+      return {
+        status: 500,
+        message: error
+      }
     }
   },
   getProjects: async () => {
     const sql = `
       SELECT
-      project_id as projectId, project_name as projectName, project_desc as projectDescription, project_color as projectColor, user_name as projectCreator
-      FROM project
-      LEFT JOIN user
-      ON project.project_creator_id = user.user_id
+      project_id as projectId, project_name as projectName, project_desc as projectDescription, project_color as projectColor, user_name as projectCreator, COUNT(user_id) as userCount
+      FROM 
+      (project p LEFT JOIN user ON project.project_creator_id = user.user_id)
+      LEFT JOIN user_project up ON p.project_id = up.project_id
+      GROUP BY p.id;
     `;
-    const result = await query(sql);
+    try {
+      const result = await query(sql);
+      console.log(result)
 
-    if (result && result.length >= 0) {
-      return {
-        status: 200,
-        message: '操作成功',
-        data: result
+      if (result && result.length >= 0) {
+        return {
+          status: 200,
+          message: '操作成功',
+          data: result
+        }
       }
-    }
-    return {
-      status: 207,
-      message: '未知错误'
+    } catch (error) {
+      return {
+        status: 500,
+        message: JSON.stringify(error)
+      }
     }
   }
 }
