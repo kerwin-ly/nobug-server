@@ -1,7 +1,7 @@
 # nobug
 >A website to monitor bugs.The web project is here.https://github.com/kerwin-ly/nobug-web
 
-## Technology Stack
+## Technology Stacks
 Node.js + Koa2 + Mysql + Redis
 
 ## Start
