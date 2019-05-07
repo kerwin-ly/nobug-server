@@ -9,11 +9,8 @@ Node.js + Koa2 + Mysql + Redis
 # You have to install redis
 brew install redis
 
-# start redis server
+# start redis server(get detail: redis-cli)
 redis-server
-
-# if you wanna to get redis detail
-redis-cli
 
 # start mysql
 sudo /usr/local/MySQL/support-files/mysql.server start
