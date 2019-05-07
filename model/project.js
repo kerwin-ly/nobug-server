@@ -33,15 +33,14 @@ module.exports = {
   getProjects: async () => {
     const sql = `
       SELECT
-      project_id as projectId, project_name as projectName, project_desc as projectDescription, project_color as projectColor, user_name as projectCreator, COUNT(user_id) as userCount
-      FROM 
-      (project p LEFT JOIN user ON project.project_creator_id = user.user_id)
-      LEFT JOIN user_project up ON p.project_id = up.project_id
-      GROUP BY p.id;
+      p.project_id as projectId, p.project_name as projectName, p.project_desc as projectDescription, p.project_color as projectColor, u.user_name as projectCreator, COUNT(up.user_id) as userCount
+      FROM
+      (project p LEFT JOIN user_project up ON p.project_id = up.project_id)
+      LEFT JOIN user u ON p.project_creator_id = u.user_id
+      GROUP BY p.project_id
     `;
     try {
       const result = await query(sql);
-      console.log(result)
 
       if (result && result.length >= 0) {
         return {
