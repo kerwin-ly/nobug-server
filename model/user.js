@@ -1,6 +1,5 @@
 const { query } =  require('../utils/query');
-const Store = require("../middleware/store.js"); //redis
-const redis = new Store();
+const store = require("../utils/store.js"); //redis
 
 module.exports = {
   login: async (loginInfo, ctx) => {
@@ -23,7 +22,7 @@ module.exports = {
       }
     } catch (error) {
       return {
-        status: 402,
+        status: 500,
         message: error
       }
     }
@@ -87,8 +86,7 @@ module.exports = {
     return data;
   },
   updateUserInfo: async (userInfo, ctx) => {
-    const SESSIONID = ctx.cookies.get('SESSIONID')
-    const redisData = await redis.get(SESSIONID);
+    const redisData = await store.getRedisData(ctx);
     const sql = 'UPDATE user SET user_name = ?, user_phone = ? WHERE user_id = ?';
     const values = [userInfo.name, userInfo.phone, redisData.user.id];
 
@@ -98,6 +96,36 @@ module.exports = {
       return {
         status: 200,
         message: '操作成功'
+      }
+    } catch (error) {
+      return {
+        status: 500,
+        message: error
+      }
+    }
+  },
+  updatePwd: async (pwd, ctx) => {
+    const redisData = await store.getRedisData(ctx);
+    const findUserSql = 'SELECT user_id FROM user WHERE user_id = ? AND user_password = ?';
+    const findUserValues = [redisData.user.id, pwd.originPwd];
+
+    try {
+      const users = await query(findUserSql, findUserValues);
+
+      if (users && users.length === 1) {
+        const updatePwdSql = 'UPDATE user SET user_password = ? WHERE user_id = ?';
+        const updatePwdValues = [pwd.newPwd, redisData.user.id];
+
+        await query(updatePwdSql, updatePwdValues);
+
+        return {
+          status: 200,
+          message: '操作成功'
+        }
+      }
+      return {
+        status: 207,
+        message: '原密码错误'
       }
     } catch (error) {
       return {

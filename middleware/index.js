@@ -5,7 +5,7 @@ const session = require('koa-session2'); // session
 const path = require('path');
 const miSend = require('./send');
 const checkSession = require('./checkSession');
-const Store = require("./store.js"); //redis
+const store = require("../utils/store.js"); //redis
 
 module.exports = (app) => {
   // other-middlewares
@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.use(serve(path.resolve(__dirname, './public')));
   app.use(session({
     key: 'SESSIONID', // default
-    store: new Store()
+    store: new store.RedisStore()
   }, app));
 
   // self-middlewares

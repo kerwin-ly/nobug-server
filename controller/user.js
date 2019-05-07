@@ -15,5 +15,8 @@ module.exports = {
 	},
 	updateUserInfo: async(ctx) => {
 		ctx.response.body = await userModel.updateUserInfo(ctx.request.body, ctx);
+	},
+	updatePwd: async(ctx) => {
+		ctx.response.body = await userModel.updatePwd(ctx.request.body, ctx);
 	}
 }

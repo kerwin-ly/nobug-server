@@ -6,5 +6,6 @@ router.post('/register', userController.register);
 router.get('/logout', userController.logout);
 router.get('/list', userController.getUserList);
 router.post('/update', userController.updateUserInfo);
+router.post('/pwd/u', userController.updatePwd);
 
 module.exports = router;

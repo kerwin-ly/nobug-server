@@ -6,5 +6,5 @@ module.exports = {
 	},
 	getProjects: async(ctx, next) => {
 		ctx.response.body = await projectModel.getProjects(ctx);
-	},
+	}
 }

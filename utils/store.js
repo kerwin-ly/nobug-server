@@ -1,6 +1,7 @@
 const Redis = require("ioredis");
 const { Store } = require("koa-session2");
-const config = require('../config')
+const config = require('../config');
+let redis;
  
 class RedisStore extends Store {
   constructor() {
@@ -24,5 +25,19 @@ class RedisStore extends Store {
     return await this.redis.del(`SESSION:${sid}`);
   }
 }
- 
-module.exports = RedisStore;
+
+module.exports = {
+  RedisStore,
+  getRedisData: async (ctx) => {
+    if (!redis) {
+      redis = new RedisStore();
+    }
+    const SESSIONID = ctx.cookies.get('SESSIONID'); // 判断用户是否登录，获取cookie里的SESSIONID
+
+    if (SESSIONID) {
+      const redisData = await redis.get(SESSIONID); // 如果有SESSIONID，就去redis里拿数据
+
+      return redisData;
+    }
+  }
+}

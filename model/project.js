@@ -1,11 +1,9 @@
 const { query } =  require('../utils/query');
-const Store = require("../middleware/store.js"); //redis
-const redis = new Store();
+const store = require("../utils/store.js"); //redis
 
 module.exports = {
   addProject: async (project, ctx) => {
-    const SESSIONID = ctx.cookies.get('SESSIONID')
-    const redisData = await redis.get(SESSIONID);
+    const redisData = await store.getRedisData(ctx);
     const sql = `INSERT INTO project (project_name, project_color, project_desc, project_creator_id) VALUES (?, ?, ?, ?)`;
     const values = [project.name, project.backgroundColor, project.description, redisData.user.id];
     
