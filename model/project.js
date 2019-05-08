@@ -24,7 +24,7 @@ module.exports = {
     } catch (error) {
       return {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
   },
@@ -53,5 +53,36 @@ module.exports = {
         message: JSON.stringify(error)
       }
     }
+  },
+  deleteProject: async (ctx) => {
+    const requestData = ctx.request.query;
+    const sql = 'DELETE FROM project WHERE project_id = ? AND project_creator_id = ?';
+    const relationSql = 'DELETE FROM user_project WHERE project_id = ?';
+    const redisData = await store.getRedisData(ctx);
+    const values = [requestData.data, redisData.user.id];
+    const relationValues = [requestData.data];
+
+    try {
+      const result = await query(sql, values);
+      const relationResult = await query(relationSql, relationValues);
+
+      if (result.affectedRows > 0 && relationResult.affectedRows > 0) {
+        return {
+          status: 200,
+          message: '删除成功'
+        }
+      } else {
+        return {
+          status: 403,
+          message: '无操作权限'
+        }
+      }
+    } catch (error) {
+      return {
+        status: 500,
+        message: JSON.stringify(error)
+      }
+    }
+    
   }
 }

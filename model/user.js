@@ -23,7 +23,7 @@ module.exports = {
     } catch (error) {
       return {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
   },
@@ -53,7 +53,7 @@ module.exports = {
     } catch (error) {
       return {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
   },
@@ -80,7 +80,7 @@ module.exports = {
     } catch (error) {
       data = {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
     return data;
@@ -100,7 +100,7 @@ module.exports = {
     } catch (error) {
       return {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
   },
@@ -130,7 +130,7 @@ module.exports = {
     } catch (error) {
       return {
         status: 500,
-        message: error
+        message: JSON.stringify(error)
       }
     }
   }
