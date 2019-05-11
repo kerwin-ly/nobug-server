@@ -83,6 +83,33 @@ module.exports = {
         message: JSON.stringify(error)
       }
     }
-    
+  },
+  getProjectDetail: async (ctx) => {
+    const requestData = ctx.request.query;
+    const sql = `
+      SELECT
+      project_id AS projectId, project_name AS projectName, project_desc AS projectDesc, project_color AS projectColor, user_name AS projectCreator
+      FROM project p
+      LEFT JOIN user u ON p.project_creator_id = u.user_id
+      WHERE p.project_id = ?
+    `;
+    const values = [requestData.data];
+
+    try {
+      const result = await query(sql, values);
+
+      if (result && result.length > 0) {
+        return {
+          status: 200,
+          message: '操作成功',
+          data: result[0]
+        }
+      }
+    } catch (error) {
+      return {
+        status: 500,
+        message: JSON.stringify(error)
+      }
+    }
   }
 }

@@ -9,5 +9,8 @@ module.exports = {
 	},
 	deleteProject: async(ctx) => {
 		ctx.response.body = await projectModel.deleteProject(ctx);
+	},
+	getProjectDetail: async(ctx) => {
+		ctx.response.body = await projectModel.getProjectDetail(ctx);
 	}
 }
