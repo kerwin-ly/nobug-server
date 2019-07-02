@@ -4,7 +4,9 @@
   "description": "nobug-server",
   "main": "app.js",
   "scripts": {
-    "server": "./node_modules/.bin/nodemon --inspect bin/www",
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' --inspect bin/www",
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
   },
@@ -29,10 +31,14 @@
     "mysql": "^2.16.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-plugin-mocha": "^5.3.0",
-    "eslint-plugin-node": "^9.0.1",
+    "@types/koa": "^2.0.49",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-router": "^7.0.42",
+    "@types/node": "^12.0.10",
     "mocha": "^6.0.2",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.2"
   }
 }
