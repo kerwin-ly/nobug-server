@@ -1,5 +1,7 @@
-const router = require('koa-router')();
-const userController = require('../controller/user');
+import * as Router from 'koa-router';
+import { userController } from '../controller';
+
+const router = new Router();
 
 router.post('/login', userController.login);
 router.post('/register', userController.register);
@@ -8,4 +10,4 @@ router.get('/list', userController.getUserList);
 router.post('/update', userController.updateUserInfo);
 router.post('/pwd/u', userController.updatePwd);
 
-module.exports = router;
+export const userRouter = router;

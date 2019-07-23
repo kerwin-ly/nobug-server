@@ -1,22 +1,23 @@
-const userModel = require('../model/user');
+import { userModel } from '../model';
+import { BaseContext } from 'koa';
 
-module.exports = {
-	login: async(ctx) => {
+export default class UserController {
+	public async login(ctx: BaseContext) {
 		ctx.response.body = await userModel.login(ctx.request.body, ctx);
-	},
-	register: async(ctx) => {
+	}
+	public async register(ctx: BaseContext) {
 		ctx.response.body = await userModel.register(ctx.request.body);
-	},
-	logout: async(ctx) => {
+	}
+	public async logout(ctx: BaseContext) {
 		ctx.response.body = await userModel.logout(ctx);
-	},
-	getUserList: async(ctx) => {
+	}
+	public async getUserList(ctx: BaseContext) {
 		ctx.response.body = await userModel.getUserList();
-	},
-	updateUserInfo: async(ctx) => {
+	}
+	public async updateUserInfo(ctx: BaseContext) {
 		ctx.response.body = await userModel.updateUserInfo(ctx.request.body, ctx);
-	},
-	updatePwd: async(ctx) => {
+	}
+	public async updatePwd(ctx: BaseContext) {
 		ctx.response.body = await userModel.updatePwd(ctx.request.body, ctx);
 	}
 }
