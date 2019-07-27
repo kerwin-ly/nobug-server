@@ -1,7 +1,8 @@
 import * as Router from 'koa-router';
-import { projectController } from '../controller';
+import { ProjectController } from '../controller';
 
 const router = new Router();
+const projectController = new ProjectController();
 
 router.post('/add', projectController.addProject);
 router.get('/list', projectController.getProjects);

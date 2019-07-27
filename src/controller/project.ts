@@ -1,7 +1,10 @@
-import { projectModel } from '../model';
+import { ProjectModel } from '../model';
 import { BaseContext } from 'koa';
 
-export default class ProjectController {
+const projectModel = new ProjectModel();
+
+export class ProjectController {
+	constructor() {}
 	public async addProject(ctx: BaseContext) {
 		ctx.response.body = await projectModel.addProject(ctx.request.body, ctx);
 	}

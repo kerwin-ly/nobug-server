@@ -1,2 +1,2 @@
-export * from './project';
-export * from './user';
+export { ProjectModel } from './project';
+export { UserModel } from './user';

@@ -1,7 +1,8 @@
 import { query, store } from '../utils';
+import { BaseContext } from 'koa';
 
-export const userModel = {
-	login: async (loginInfo, ctx) => {
+export class UserModel {
+	public async login(loginInfo: any, ctx: BaseContext): Promise<any> {
 		const sql = `SELECT user_id as id, user_name as name, user_email as email, user_phone as phone FROM user WHERE user_email = "${
 			loginInfo.email
 		}" AND user_password = "${loginInfo.password}"`;
@@ -27,8 +28,9 @@ export const userModel = {
 				message: JSON.stringify(error)
 			};
 		}
-	},
-	register: async userInfo => {
+	}
+
+	public async register(userInfo: any): Promise<any> {
 		const checkExitUserSql = `SELECT user_id from user WHERE user_email= "${
 			userInfo.email
 		}"`;
@@ -59,8 +61,9 @@ export const userModel = {
 				message: JSON.stringify(error)
 			};
 		}
-	},
-	logout: async ctx => {
+	}
+
+	public async logout(ctx: BaseContext): Promise<any> {
 		let data;
 
 		ctx.session = null;
@@ -69,8 +72,9 @@ export const userModel = {
 			message: '注销成功'
 		};
 		return data;
-	},
-	getUserList: async () => {
+	}
+
+	public async getUserList(): Promise<any> {
 		const sql = 'SELECT * FROM user';
 		let data;
 
@@ -87,8 +91,9 @@ export const userModel = {
 			};
 		}
 		return data;
-	},
-	updateUserInfo: async (userInfo, ctx) => {
+	}
+
+	public async updateUserInfo(userInfo: any, ctx: BaseContext): Promise<any> {
 		const redisData = await store.getRedisData(ctx);
 		const sql =
 			'UPDATE user SET user_name = ?, user_phone = ? WHERE user_id = ?';
@@ -107,8 +112,9 @@ export const userModel = {
 				message: JSON.stringify(error)
 			};
 		}
-	},
-	updatePwd: async (pwd, ctx) => {
+	}
+
+	public async updatePwd(pwd: any, ctx: BaseContext): Promise<any> {
 		const redisData = await store.getRedisData(ctx);
 		const findUserSql =
 			'SELECT user_id FROM user WHERE user_id = ? AND user_password = ?';
@@ -140,4 +146,4 @@ export const userModel = {
 			};
 		}
 	}
-};
+}
