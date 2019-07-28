@@ -1,11 +1,12 @@
 import { store } from '../utils/store';
 import { query } from '../utils/query';
+import { IProjectModel, IResponse } from '../entity';
 import { BaseContext } from 'koa';
 
-export class ProjectModel {
+export class ProjectModel implements IProjectModel {
 	constructor() {}
 
-	public async addProject(project: any, ctx: BaseContext): Promise<any> {
+	public async addProject(project: any, ctx: BaseContext): Promise<IResponse> {
 		const redisData = await store.getRedisData(ctx);
 		const sql = `INSERT INTO project (project_name, project_color, project_desc, project_creator_id) VALUES (?, ?, ?, ?)`;
 		const values = [
@@ -40,7 +41,7 @@ export class ProjectModel {
 		}
 	}
 
-	public async getProjects(): Promise<any> {
+	public async getProjects(): Promise<IResponse> {
 		const sql = `
       SELECT
       p.project_id as projectId, p.project_name as projectName, p.project_desc as projectDescription, p.project_color as projectColor, u.user_name as projectCreator, COUNT(up.user_id) as userCount
@@ -67,7 +68,7 @@ export class ProjectModel {
 		}
 	}
 
-	public async deleteProject(ctx: BaseContext): Promise<any> {
+	public async deleteProject(ctx: BaseContext): Promise<IResponse> {
 		const requestData = ctx.request.query;
 		const sql =
 			'DELETE FROM project WHERE project_id = ? AND project_creator_id = ?';
@@ -99,7 +100,7 @@ export class ProjectModel {
 		}
 	}
 
-	public async getProjectDetail(ctx: BaseContext): Promise<any> {
+	public async getProjectDetail(ctx: BaseContext): Promise<IResponse> {
 		const requestData = ctx.request.query;
 		const sql = `
       SELECT

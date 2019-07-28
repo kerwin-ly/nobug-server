@@ -7,6 +7,7 @@ export class UserController {
 	constructor() {}
 
 	public async login(ctx: BaseContext) {
+		console.log(ctx);
 		ctx.response.body = await userModel.login(ctx.request.body, ctx);
 	}
 	public async register(ctx: BaseContext) {

@@ -1,13 +1,15 @@
 import { redisConfig } from '../config';
+
 const Redis = require('ioredis');
 const { Store } = require('koa-session2');
 let redis: any;
 
 class RedisStore extends Store {
-	public redis = new Redis(redisConfig);
+	public redis: any;
 
 	constructor() {
 		super();
+		this.redis = new Redis(redisConfig);
 	}
 
 	async get(sid, ctx) {

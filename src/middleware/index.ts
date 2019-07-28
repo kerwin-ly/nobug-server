@@ -1,7 +1,7 @@
 import * as bodyParser from 'koa-bodyparser';
 import * as serve from 'koa-static';
 import * as path from 'path';
-import session from 'koa-session2';
+import * as session from 'koa-session2';
 import { miSend } from './send';
 import { checkSession } from './checkSession';
 import { store } from '../utils/store';
