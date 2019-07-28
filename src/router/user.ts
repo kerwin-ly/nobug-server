@@ -1,7 +1,8 @@
 import * as Router from 'koa-router';
-import { userController } from '../controller';
+import { UserController } from '../controller';
 
 const router = new Router();
+const userController = new UserController();
 
 router.post('/login', userController.login);
 router.post('/register', userController.register);

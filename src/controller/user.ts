@@ -1,8 +1,13 @@
-import { userModel } from '../model';
+import { UserModel } from '../model';
 import { BaseContext } from 'koa';
 
-export default class UserController {
+const userModel = new UserModel();
+
+export class UserController {
+	constructor() {}
+
 	public async login(ctx: BaseContext) {
+		console.log(ctx);
 		ctx.response.body = await userModel.login(ctx.request.body, ctx);
 	}
 	public async register(ctx: BaseContext) {

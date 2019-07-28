@@ -1,2 +1,2 @@
-export { default as userController } from './user';
-export { default as projectController } from './project';
+export { UserController } from './user';
+export { ProjectController } from './project';
