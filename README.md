@@ -4,19 +4,26 @@
 ## Technical Stacks
 Node.js + Koa2 + Mysql + Redis
 
+## Install
+```bash
+# install mysql
+brew install redis
+
+# install redis
+brew install redis
+```
+
 ## Start
 ```bash
-# You have to install redis
-brew install redis
 
 # start redis server(get detail: redis-cli)
 redis-server
 
 # start mysql
-sudo /usr/local/MySQL/support-files/mysql.server start
+mysql.server start
 
 # install
-cnpm install
+npm install
 
 # start node server
 npm run server
