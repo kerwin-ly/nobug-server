@@ -22,6 +22,9 @@ redis-server
 # start mysql
 mysql.server start
 
+# login && input password
+mysql -u root -p
+
 # install
 npm install
 
