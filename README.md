@@ -7,7 +7,7 @@ Node.js + Koa2 + Mysql + Redis
 ## Install
 ```bash
 # install mysql
-brew install redis
+brew install mysql
 
 # install redis
 brew install redis
@@ -21,6 +21,9 @@ redis-server
 
 # start mysql
 mysql.server start
+
+# login && input password
+mysql -u root -p
 
 # install
 npm install
