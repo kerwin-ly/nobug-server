@@ -11,6 +11,9 @@ brew install mysql
 
 # install redis
 brew install redis
+
+# install conventional-changelog-cli
+npm install -g conventional-changelog-cli
 ```
 
 ## Start
@@ -31,4 +34,11 @@ npm install
 # start node server
 npm run server
 
+```
+
+## Release
+
+```bash
+# generate CHANGELOG.md automaticly
+npm run release-log 
 ```

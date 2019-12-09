@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "server": "./node_modules/.bin/nodemon --inspect bin/www",
+    "release-log": "conventional-changelog -p angular -i CHANGELOG.md -s -p ",
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
   },
