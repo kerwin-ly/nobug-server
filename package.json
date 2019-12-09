@@ -8,6 +8,13 @@
     "test": "./node_modules/.bin/mocha -u bdd",
     "pm2": "pm2 start bin/www"
   },
+  {
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
+  }
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kerwin-ly/node-forum.git"
@@ -29,6 +36,8 @@
     "mysql": "^2.16.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-mocha": "^5.3.0",
     "eslint-plugin-node": "^9.0.1",
