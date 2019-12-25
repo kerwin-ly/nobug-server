@@ -13,7 +13,7 @@ brew install redis
 redis-server
 
 # start mysql
-sudo /usr/local/MySQL/support-files/mysql.server start
+mysql.server start
 
 # install
 cnpm install
